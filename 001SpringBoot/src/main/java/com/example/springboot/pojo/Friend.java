@@ -1,4 +1,5 @@
-package com.example.springboot;
+package com.example.springboot.pojo;
+
 
 public class Friend {
 	
