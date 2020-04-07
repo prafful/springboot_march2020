@@ -2,8 +2,10 @@ package com.example.springboot.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.stereotype.Repository;
 
 import com.example.springboot.entity.FriendEntity;
@@ -39,17 +41,14 @@ public class FriendDao {
 		return friendRepository.findAll();
 	}
 	
-	public Friend getFriendById( int id ) {
+	public FriendEntity getFriendById( int id ) {
 		System.out.println("Get friend with id: " + id);
-		Friend tempFriend = new Friend();
-		for (int i = 0; i < friends.size(); i++) {
-			tempFriend = friends.get(i);
-			if(tempFriend.getId() == id) {
-				return tempFriend;
-			}
-			
+		Optional<FriendEntity> optionalFe = friendRepository.findById(id);
+		FriendEntity fe = new FriendEntity();
+		if(optionalFe.isPresent()) {
+			fe = optionalFe.get();
 		}
-		return null;
+		return fe;
 		
 	}
 	
@@ -59,6 +58,7 @@ public class FriendDao {
 		fe.setName(f.getName());
 		fe.setLocation(f.getLocation());	
 		friendRepository.save(fe);
+		
 		return friendRepository.findAll();
 		
 	}
@@ -88,6 +88,12 @@ public class FriendDao {
 			}
 		}
 		return friends;
+	}
+
+
+	public List<FriendEntity> getFriendByLocation(String location) {
+		// TODO Auto-generated method stub
+		return friendRepository.findByLocation(location);
 	}
 	
 	

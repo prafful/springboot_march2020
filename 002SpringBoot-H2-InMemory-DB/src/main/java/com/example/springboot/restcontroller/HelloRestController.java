@@ -34,8 +34,14 @@ public class HelloRestController {
 	}
 	
 	@RequestMapping("/friend/{myid}")
-	public Friend getFriendById(@PathVariable("myid") int id ) {
+	public FriendEntity getFriendById(@PathVariable("myid") int id ) {
 		return friendService.getFriendById(id);
+		
+	}
+	
+	@RequestMapping("/friend/location/{location}")
+	public List<FriendEntity> getFriendByLocation(@PathVariable("location") String  location ) {
+		return friendService.getFriendByLocation(location);
 		
 	}
 	

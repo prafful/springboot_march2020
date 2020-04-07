@@ -19,7 +19,7 @@ public class FriendService {
 		return friendDao.getFriends();
 	}
 	
-	public Friend getFriendById( int id ) {
+	public FriendEntity getFriendById( int id ) {
 		return friendDao.getFriendById(id);
 		
 	}
@@ -37,6 +37,11 @@ public class FriendService {
 	
 	public List<Friend> deleteFriendById(int id) {
 		return friendDao.deleteFriendById(id);
+	}
+
+	public List<FriendEntity> getFriendByLocation(String location) {
+		// TODO Auto-generated method stub
+		return friendDao.getFriendByLocation(location);
 	}
 	
 
