@@ -1,4 +1,4 @@
-package com.example.springboot.dao;
+package com.example.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.stereotype.Repository;
 
-import com.example.springboot.entity.FriendEntity;
-import com.example.springboot.pojo.Friend;
-import com.example.springboot.repository.FriendRepository;
+import com.example.entity.FriendEntity;
+import com.example.pojo.Friend;
+import com.example.repository.FriendRepository;
 
 @Repository("friendDao")
 public class FriendDao {
@@ -64,36 +64,47 @@ public class FriendDao {
 	}
 
 	
-	public List<Friend> updateFriendById(int id,Friend f) {
+	public List<FriendEntity> updateFriendById(int id,Friend f) {
 		System.out.println("Update friend with id: " + id);
 		System.out.println("Update content: "+ f.getName() + ", "  + f.getId() + ", " + f.getLocation());
-		Friend tempFriend = new Friend(); 
-		for(int i=0; i<friends.size(); i++) {
-			tempFriend = friends.get(i);
-			if(tempFriend.getId() == id) {
-				friends.set(i, f);
-			}
+		Optional<FriendEntity> feo = friendRepository.findById(id);
+		//check if optional contains the valid entity (received with valid id)
+		if(feo.isPresent()) {
+			FriendEntity fe = new FriendEntity();
+			fe = feo.get();
+			System.out.println(fe.getName());
+			System.out.println(fe.getLocation());
+			fe.setName(f.getName());
+			fe.setLocation(f.getLocation());
+			fe.setId(id);
+			//friendRepository.save(new FriendEntity(feo.get().setId(id), feo.get().setName(f.getName()), feo.get().setLocation(f.getLocation()))));
+			friendRepository.saveAndFlush(fe);
+			
 		}
 		
-		return friends;
+		return friendRepository.findAll();
 	}
 	
 	
-	public List<Friend> deleteFriendById(int id) {
-		Friend tempFriend = new Friend(); 
-		for(int i=0; i<friends.size(); i++) {
-			tempFriend = friends.get(i);
-			if(tempFriend.getId() == id) {
-				friends.remove(i);
-			}
+	public List<FriendEntity> deleteFriendById(int id) {
+		Optional<FriendEntity> feo = friendRepository.findById(id);
+		if(feo.isPresent()) {
+			friendRepository.deleteById(id);
 		}
-		return friends;
+		
+		return friendRepository.findAll();
 	}
 
 
 	public List<FriendEntity> getFriendByLocation(String location) {
 		// TODO Auto-generated method stub
 		return friendRepository.findByLocation(location);
+	}
+
+
+	public List<Friend> updateFriendPatchById(int id, Friend f) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

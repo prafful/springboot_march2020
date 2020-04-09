@@ -1,13 +1,13 @@
-package com.example.springboot.service;
+package com.example.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.springboot.dao.FriendDao;
-import com.example.springboot.entity.FriendEntity;
-import com.example.springboot.pojo.Friend;
+import com.example.dao.FriendDao;
+import com.example.entity.FriendEntity;
+import com.example.pojo.Friend;
 
 @Service("friendService")
 public class FriendService {
@@ -30,18 +30,23 @@ public class FriendService {
 	}
 
 	
-	public List<Friend> updateFriendById(int id,Friend f) {
+	public List<FriendEntity> updateFriendById(int id,Friend f) {
 		return friendDao.updateFriendById(id, f);
 	}
 	
 	
-	public List<Friend> deleteFriendById(int id) {
+	public List<FriendEntity> deleteFriendById(int id) {
 		return friendDao.deleteFriendById(id);
 	}
 
 	public List<FriendEntity> getFriendByLocation(String location) {
 		// TODO Auto-generated method stub
 		return friendDao.getFriendByLocation(location);
+	}
+
+	public List<Friend> updateFriendPatchById(int id, Friend f) {
+		// TODO Auto-generated method stub
+		return friendDao.updateFriendPatchById(id, f);
 	}
 	
 

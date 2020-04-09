@@ -1,10 +1,10 @@
-package com.example.springboot.repository;
+package com.example.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.springboot.entity.FriendEntity;
+import com.example.entity.FriendEntity;
 
 public interface FriendRepository extends JpaRepository<FriendEntity, Integer>{
 
