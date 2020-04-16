@@ -85,9 +85,23 @@ public class FriendDao {
 	}
 
 
-	public List<Friend> updateFriendPatchById(int id, Friend f) {
+	public List<FriendEntity> updateFriendPatchById(int id, Friend f) {
 		// TODO Auto-generated method stub
-		return null;
+		//get friend by id
+		Optional<FriendEntity> feo = friendRepository.findById(id);
+		FriendEntity feTemp = new FriendEntity();
+		if(feo.isPresent()) {
+			feTemp = feo.get();
+			if(f.getName()!= null) {
+				feTemp.setName(f.getName());
+			}
+			if(f.getLocation()!=null) {
+				feTemp.setLocation(f.getLocation());
+			}
+			friendRepository.saveAndFlush(feTemp);
+		}
+		
+		return friendRepository.findAll();
 	}
 	
 	
