@@ -6,5 +6,27 @@
 </head>
 <body>
 <h1>View Friends</h1>
+
+ <table border="1">
+ <thead>
+ 	<tr>
+ 		<th>Id</th>
+ 		<th>Name</th>
+ 		<th>Location</th>
+ 		<th>Years</th>
+ 	</tr>
+ </thead>
+ <tbody>
+ 	<tr th:each="friend: ${friends}">
+ 		<td th:text="${friend.id}"></td>
+	 	<td th:text="${friend.name}"></td>
+	 	<td th:text="${friend.location}"></td>
+	 	<td th:text="${friend.years}"></td>
+ 	</tr>
+ 
+ </tbody>
+ </table>
+
+
 </body>
 </html>
