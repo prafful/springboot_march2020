@@ -3,9 +3,9 @@ package com.example.springboot.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.springboot.entity.EmployeePan;
+import com.example.springboot.entity.EmployeePanEntity;
 
 @Repository
-public interface EmployeePanRepository extends JpaRepository<EmployeePan, Integer>{
+public interface EmployeePanEntityRepository extends JpaRepository<EmployeePanEntity, Integer>{
 
 }

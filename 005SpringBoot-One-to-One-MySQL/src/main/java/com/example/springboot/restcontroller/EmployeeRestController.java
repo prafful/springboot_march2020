@@ -1,39 +1,36 @@
 package com.example.springboot.restcontroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springboot.entity.Employee;
-import com.example.springboot.entity.EmployeePan;
-import com.example.springboot.repository.EmployeePanRepository;
-import com.example.springboot.repository.EmployeeRepository;
+import com.example.springboot.entity.EmployeeEntity;
+import com.example.springboot.pojo.Employee;
+import com.example.springboot.service.EmployeeService;
 
 @RestController
 public class EmployeeRestController {
 
-	@Autowired
-	private EmployeeRepository employeeRepopsitory;
-	
-	@Autowired
-	private EmployeePanRepository employeePanRepository;
-	
+	@Autowired 
+	private EmployeeService employeeService;
 	
 	@RequestMapping("/")
 	public String welcome() {
-		
-		EmployeePan ep = new EmployeePan();
-		ep.setPanNumber("AAAAAAAAA");
-		employeePanRepository.save(ep);
-		
-		Employee e = new Employee();
-		e.setFirstName("OBB");
-		e.setLastName("OMG");
-		e.setEmployeePan(ep);
-		
-		employeeRepopsitory.save(e);
-		
-		return "Hello from One to One!!!!";
+			return "Hello from One to One!!!!!";
+	}
+	
+	@RequestMapping("/all")
+	public List<Employee> getAllEmployess() {
+		return employeeService.getAllEmployess();
+	}
+	
+	@PostMapping("/add")
+	public Employee addEmployee(@RequestBody Employee e) {
+		return employeeService.addEmployee(e);
 	}
 	
 }
